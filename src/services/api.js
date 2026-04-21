@@ -7,7 +7,7 @@ export const getToken = async () => {
     console.log('Fetching token from:', `${API_BASE_URL}/public/token`);
     const response = await axios.post(`${API_BASE_URL}/public/token`, {
       "studentId": "E0223022",
-      "set": "setB"
+      "set": "setB",
       "password": "327759"
     });
     console.log('Token response:', response.data);
