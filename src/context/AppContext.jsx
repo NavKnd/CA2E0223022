@@ -10,9 +10,18 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
+        console.log('App loading - fetching token...');
         const token = await getToken();
+        console.log('Token received:', token);
+        
         const data = await getData(token);
-        dispatch({ type: 'LOAD_DATA', payload: data });
+        console.log('Raw data received:', data);
+        
+        // Handle different response formats
+        const activities = Array.isArray(data) ? data : data.activities || data.data || [];
+        console.log('Processing activities:', activities);
+        
+        dispatch({ type: 'LOAD_DATA', payload: activities });
       } catch (error) {
         console.error('Failed to load data:', error);
       }
